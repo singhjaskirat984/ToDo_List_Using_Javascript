@@ -93,6 +93,42 @@ function update() {
 
 //function to delete
 function del(itemIndex) {
+
+    let a;
+    let Enddate;
+    let Endtime;
+    a = new Date(); // for date
+    Enddate = a.toLocaleDateString(undefined); //for date
+    Endtime = a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds();
+
+    
+    var itemJsonArrayStr = localStorage.getItem('itemsJson')
+    itemJsonArray = JSON.parse(itemJsonArrayStr);
+    let EntryDate = itemJsonArray[itemIndex][0]
+    let EntryTime = itemJsonArray[itemIndex][1]
+    let tit = itemJsonArray[itemIndex][2]
+
+    // to store values in CSV Array
+    if (localStorage.getItem('CSVJson') == null) {
+        var CSVJsonArray = [];
+        CSVJsonArray.push([EntryDate, EntryTime, tit, Endtime, Enddate]);
+        var str1 = JSON.stringify(CSVJsonArray)
+        localStorage.setItem('CSVJson', str1)
+    }
+    else {
+        var CSVJsonArrayStr = localStorage.getItem('CSVJson')
+        CSVJsonArray = JSON.parse(CSVJsonArrayStr);
+        CSVJsonArray.push([EntryDate, EntryTime, tit, Endtime, Enddate]);
+        var str2 = JSON.stringify(CSVJsonArray)
+        localStorage.setItem('CSVJson', str2)
+    }
+
+    realDel(itemIndex)
+    console.log(CSVJsonArray)
+    console.log(itemJsonArray)
+}
+
+function realDel(itemIndex){
     console.log("delete", itemIndex)
     //retireving values from local storage
     var itemJsonArrayStr = localStorage.getItem('itemsJson')
@@ -119,12 +155,12 @@ downloadCSV.addEventListener("click", download);
 
 function download() {
     // values retrieved
-    var itemJsonArrayStr = localStorage.getItem('itemsJson')
-    itemJsonArray = JSON.parse(itemJsonArrayStr);
+    var CSVJsonArrayStr = localStorage.getItem('CSVJson')
+    CSVJsonArray = JSON.parse(CSVJsonArrayStr);
 
     var csv = 'EntryDate,EntryTime,ItemTitle,EndTime,EndDate\n';
 
-    itemJsonArray.forEach(function (row) {
+    CSVJsonArray.forEach(function (row) {
         csv += row.join(',');
         csv += "\n";
     });

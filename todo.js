@@ -175,5 +175,7 @@ function download() {
     //provide the name for the CSV file to be downloaded  
     hiddenElement.download = 'ToDo.csv';
     hiddenElement.click();
+
+    localStorage.removeItem("CSVJson")
 }
 

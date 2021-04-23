@@ -131,7 +131,7 @@ function del(itemIndex) {
 }
 
 // to delete items from itemJsonArray and update the local storage
-function realDel(itemIndex){
+function realDel(itemIndex) {
     console.log("delete", itemIndex)
     //retireving values from local storage
     var itemJsonArrayStr = localStorage.getItem('itemsJson')
@@ -168,12 +168,12 @@ function download() {
         csv += "\n";
     });
 
-    var hiddenElement = document.createElement('a');  
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);  
-    hiddenElement.target = '_blank';  
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
 
     //provide the name for the CSV file to be downloaded  
-    hiddenElement.download = 'ToDo.csv';  
+    hiddenElement.download = 'ToDo.csv';
     hiddenElement.click();
 }
 

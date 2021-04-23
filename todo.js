@@ -176,6 +176,7 @@ function download() {
     hiddenElement.download = 'ToDo.csv';
     hiddenElement.click();
 
+    // to clear CSVJson after downloading CSV
     localStorage.removeItem("CSVJson")
 }
 

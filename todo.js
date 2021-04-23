@@ -94,6 +94,7 @@ function update() {
 //function to delete
 function del(itemIndex) {
 
+    //  to fetch the end date and time
     let a;
     let Enddate;
     let Endtime;
@@ -101,7 +102,7 @@ function del(itemIndex) {
     Enddate = a.toLocaleDateString(undefined); //for date
     Endtime = a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds();
 
-    
+    // too fetch entry date and time and title of the deleted item from itemJsonArray ans storing them in CSVJsonArray
     var itemJsonArrayStr = localStorage.getItem('itemsJson')
     itemJsonArray = JSON.parse(itemJsonArrayStr);
     let EntryDate = itemJsonArray[itemIndex][0]
@@ -123,11 +124,13 @@ function del(itemIndex) {
         localStorage.setItem('CSVJson', str2)
     }
 
+    // to delete items from itemJsonArray and update the local storage
     realDel(itemIndex)
     console.log(CSVJsonArray)
     console.log(itemJsonArray)
 }
 
+// to delete items from itemJsonArray and update the local storage
 function realDel(itemIndex){
     console.log("delete", itemIndex)
     //retireving values from local storage
